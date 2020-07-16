@@ -1,0 +1,4 @@
+[console_scripts]
+tf2_gnn_test = tf2_gnn.cli.test:run
+tf2_gnn_train = tf2_gnn.cli.train:run
+

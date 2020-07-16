@@ -1,0 +1,4 @@
+numpy
+tensorflow>=2.0.0
+dpu-utils>=0.2.7
+h5py
