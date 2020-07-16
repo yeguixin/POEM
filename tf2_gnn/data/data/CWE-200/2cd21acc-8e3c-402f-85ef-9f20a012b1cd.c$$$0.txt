@@ -1,0 +1,314 @@
+-----label-----
+0
+-----code-----
+static void good2()
+{
+    if(staticFive==5)
+    {
+        {
+            size_t passwordLen = 0;
+            HANDLE hUser;
+            char * domain = "Domain";
+            /* Use the password in LogonUser() to establish that it is "sensitive" */
+            if (LogonUserA(
+                        USERNAME,
+                        domain,
+                        PASSWORD,
+                        LOGON32_LOGON_NETWORK,
+                        LOGON32_PROVIDER_DEFAULT,
+                        &hUser) != 0)
+            {
+                /* FIX: do not expose username or password in comment */
+                /* User logged in successfully */
+                printLine("User logged in successfully with password" );
+                CloseHandle(hUser);
+            }
+            else
+            {
+                printLine("Unable to login.");
+            }
+        }
+    }
+}
+-----children-----
+1,2
+1,3
+1,4
+3,4
+5,6
+6,7
+6,8
+7,8
+7,9
+8,9
+11,12
+12,13
+12,14
+12,15
+12,16
+13,14
+14,15
+14,16
+15,16
+17,18
+17,19
+19,20
+21,22
+22,23
+22,24
+23,24
+25,26
+27,28
+28,29
+28,30
+30,31
+30,32
+30,33
+33,34
+35,36
+35,37
+35,38
+36,37
+36,38
+37,38
+37,39
+37,40
+37,41
+37,42
+37,43
+37,44
+38,39
+40,41
+42,43
+44,45
+46,47
+48,49
+50,51
+51,52
+54,55
+54,56
+55,56
+56,57
+56,58
+57,58
+60,61
+61,62
+61,63
+62,63
+64,65
+66,67
+67,68
+68,69
+68,70
+69,70
+-----nextToken-----
+2,4,9,10,16,18,20,24,26,29,31,32,34,39,41,43,45,47,49,52,53,58,59,63,65,70,71
+-----computeFrom-----
+7,8
+7,9
+36,37
+36,38
+-----guardedBy-----
+52,65
+-----guardedByNegation-----
+-----lastLexicalUse-----
+-----jump-----
+-----attribute-----
+FunctionDefinition;SimpleDeclSpecifier;FunctionDeclarator;Name;CompoundStatement;IfStatement;BinaryExpression;IdExpression;Name;LiteralExpression;CompoundStatement;CompoundStatement;DeclarationStatement;SimpleDeclaration;NamedTypeSpecifier;Name;Declarator;Name;EqualsInitializer;LiteralExpression;DeclarationStatement;SimpleDeclaration;NamedTypeSpecifier;Name;Declarator;Name;DeclarationStatement;SimpleDeclaration;SimpleDeclSpecifier;Declarator;Pointer;Name;EqualsInitializer;LiteralExpression;IfStatement;BinaryExpression;FunctionCallExpression;IdExpression;Name;IdExpression;Name;IdExpression;Name;IdExpression;Name;IdExpression;Name;IdExpression;Name;UnaryExpression;IdExpression;Name;LiteralExpression;CompoundStatement;ExpressionStatement;FunctionCallExpression;IdExpression;Name;LiteralExpression;ExpressionStatement;FunctionCallExpression;IdExpression;Name;IdExpression;Name;CompoundStatement;ExpressionStatement;FunctionCallExpression;IdExpression;Name;LiteralExpression;
+-----ast_node-----
+static void good2(){    if(staticFive==5)    {        {            size_t passwordLen = 0;            HANDLE hUser;            char * domain = "Domain";            /* Use the password in LogonUser() to establish that it is "sensitive" */            if (LogonUserA(                        USERNAME,                        domain,                        PASSWORD,                        LOGON32_LOGON_NETWORK,                        LOGON32_PROVIDER_DEFAULT,                        &hUser) != 0)            {                /* FIX: do not expose username or password in comment */                /* User logged in successfully */                printLine("User logged in successfully with password" );                CloseHandle(hUser);            }            else            {                printLine("Unable to login.");            }        }    }}
+static void
+good2()
+good2
+{    if(staticFive==5)    {        {            size_t passwordLen = 0;            HANDLE hUser;            char * domain = "Domain";            /* Use the password in LogonUser() to establish that it is "sensitive" */            if (LogonUserA(                        USERNAME,                        domain,                        PASSWORD,                        LOGON32_LOGON_NETWORK,                        LOGON32_PROVIDER_DEFAULT,                        &hUser) != 0)            {                /* FIX: do not expose username or password in comment */                /* User logged in successfully */                printLine("User logged in successfully with password" );                CloseHandle(hUser);            }            else            {                printLine("Unable to login.");            }        }    }}
+if(staticFive==5)    {        {            size_t passwordLen = 0;            HANDLE hUser;            char * domain = "Domain";            /* Use the password in LogonUser() to establish that it is "sensitive" */            if (LogonUserA(                        USERNAME,                        domain,                        PASSWORD,                        LOGON32_LOGON_NETWORK,                        LOGON32_PROVIDER_DEFAULT,                        &hUser) != 0)            {                /* FIX: do not expose username or password in comment */                /* User logged in successfully */                printLine("User logged in successfully with password" );                CloseHandle(hUser);            }            else            {                printLine("Unable to login.");            }        }    }
+staticFive==5
+staticFive
+staticFive
+5
+{        {            size_t passwordLen = 0;            HANDLE hUser;            char * domain = "Domain";            /* Use the password in LogonUser() to establish that it is "sensitive" */            if (LogonUserA(                        USERNAME,                        domain,                        PASSWORD,                        LOGON32_LOGON_NETWORK,                        LOGON32_PROVIDER_DEFAULT,                        &hUser) != 0)            {                /* FIX: do not expose username or password in comment */                /* User logged in successfully */                printLine("User logged in successfully with password" );                CloseHandle(hUser);            }            else            {                printLine("Unable to login.");            }        }    }
+{            size_t passwordLen = 0;            HANDLE hUser;            char * domain = "Domain";            /* Use the password in LogonUser() to establish that it is "sensitive" */            if (LogonUserA(                        USERNAME,                        domain,                        PASSWORD,                        LOGON32_LOGON_NETWORK,                        LOGON32_PROVIDER_DEFAULT,                        &hUser) != 0)            {                /* FIX: do not expose username or password in comment */                /* User logged in successfully */                printLine("User logged in successfully with password" );                CloseHandle(hUser);            }            else            {                printLine("Unable to login.");            }        }
+size_t passwordLen = 0;
+size_t passwordLen = 0;
+size_t
+size_t
+passwordLen = 0
+passwordLen
+= 0
+0
+HANDLE hUser;
+HANDLE hUser;
+HANDLE
+HANDLE
+hUser
+hUser
+char * domain = "Domain";
+char * domain = "Domain";
+char
+* domain = "Domain"
+*
+domain
+= "Domain"
+"Domain"
+if (LogonUserA(                        USERNAME,                        domain,                        PASSWORD,                        LOGON32_LOGON_NETWORK,                        LOGON32_PROVIDER_DEFAULT,                        &hUser) != 0)            {                /* FIX: do not expose username or password in comment */                /* User logged in successfully */                printLine("User logged in successfully with password" );                CloseHandle(hUser);            }            else            {                printLine("Unable to login.");            }
+LogonUserA(                        USERNAME,                        domain,                        PASSWORD,                        LOGON32_LOGON_NETWORK,                        LOGON32_PROVIDER_DEFAULT,                        &hUser) != 0
+LogonUserA(                        USERNAME,                        domain,                        PASSWORD,                        LOGON32_LOGON_NETWORK,                        LOGON32_PROVIDER_DEFAULT,                        &hUser)
+LogonUserA
+LogonUserA
+USERNAME
+USERNAME
+domain
+domain
+PASSWORD
+PASSWORD
+LOGON32_LOGON_NETWORK
+LOGON32_LOGON_NETWORK
+LOGON32_PROVIDER_DEFAULT
+LOGON32_PROVIDER_DEFAULT
+&hUser
+hUser
+hUser
+0
+{                /* FIX: do not expose username or password in comment */                /* User logged in successfully */                printLine("User logged in successfully with password" );                CloseHandle(hUser);            }
+printLine("User logged in successfully with password" );
+printLine("User logged in successfully with password" )
+printLine
+printLine
+"User logged in successfully with password"
+CloseHandle(hUser);
+CloseHandle(hUser)
+CloseHandle
+CloseHandle
+hUser
+hUser
+{                printLine("Unable to login.");            }
+printLine("Unable to login.");
+printLine("Unable to login.")
+printLine
+printLine
+"Unable to login."
+-----joern-----
+(9,29,0)
+(31,13,0)
+(13,24,0)
+(4,21,0)
+(34,13,0)
+(35,15,0)
+(27,13,0)
+(17,26,0)
+(7,13,0)
+(21,11,0)
+(24,26,0)
+(13,7,0)
+(18,15,0)
+(6,32,0)
+(25,13,0)
+(30,26,0)
+(5,17,0)
+(20,26,0)
+(12,17,0)
+(13,31,0)
+(1,13,0)
+(3,33,0)
+(19,31,0)
+(26,22,0)
+(8,7,0)
+(29,23,0)
+(0,26,0)
+(28,24,0)
+(14,24,0)
+(16,13,0)
+(32,11,0)
+(2,26,0)
+(35,18,1)
+(27,34,1)
+(31,19,1)
+(13,24,1)
+(32,6,1)
+(21,4,1)
+(16,27,1)
+(13,31,1)
+(24,14,1)
+(14,28,1)
+(7,13,1)
+(17,5,1)
+(34,1,1)
+(8,13,1)
+(19,25,1)
+(28,17,1)
+(10,29,1)
+(25,16,1)
+(10,21,1)
+(9,7,1)
+(29,9,1)
+(5,12,1)
+(10,15,1)
+(7,8,1)
+(12,15,1)
+(15,35,1)
+(6,7,1)
+(4,32,1)
+(1,24,1)
+(5,15,2)
+(29,7,2)
+(1,15,2)
+(17,15,2)
+(28,15,2)
+(31,15,2)
+(8,15,2)
+(9,7,2)
+(16,15,2)
+(13,31,2)
+(21,7,2)
+(34,15,2)
+(12,15,2)
+(25,15,2)
+(32,7,2)
+(13,15,2)
+(4,7,2)
+(19,15,2)
+(14,15,2)
+(7,13,2)
+(24,15,2)
+(13,24,2)
+(6,7,2)
+(7,15,2)
+(27,15,2)
+-----------------------------------
+(0,if (LogonUserA(\\\\n                        USERNAME,\\\\n                        domain,\\\\n                        PASSWORD,\\\\n                        LOGON32_LOGON_NETWORK,\\\\n                        LOGON32_PROVIDER_DEFAULT,\\\\n                        &hUser)
+(1,USERNAME)
+(2,hUser)
+(3,if(staticFive==5)
+(4,hUser)
+(5,0)
+(6,"User logged in successfully with password")
+(7,LogonUserA(\\\\n                        USERNAME,\\\\n                        domain,\\\\n                        PASSWORD,\\\\n                        LOGON32_LOGON_NETWORK,\\\\n                        LOGON32_PROVIDER_DEFAULT,\\\\n                        &hUser)
+(8,0)
+(9,"Unable to login.")
+(10,RET)
+(11,)
+(12,passwordLen)
+(13,LogonUserA(\\\\n                        USERNAME,\\\\n                        domain,\\\\n                        PASSWORD,\\\\n                        LOGON32_LOGON_NETWORK,\\\\n                        LOGON32_PROVIDER_DEFAULT,\\\\n                        &hUser)
+(14,"Domain")
+(15,staticFive==5)
+(16,LOGON32_LOGON_NETWORK)
+(17,passwordLen = 0)
+(18,staticFive)
+(19,hUser)
+(20,domain)
+(21,CloseHandle(hUser)
+(22,)
+(23,)
+(24,* domain = "Domain")
+(25,LOGON32_PROVIDER_DEFAULT)
+(26,)
+(27,PASSWORD)
+(28,domain)
+(29,printLine("Unable to login.")
+(30,passwordLen)
+(31,&hUser)
+(32,printLine("User logged in successfully with password" )
+(33,)
+(34,domain)
+(35,5)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

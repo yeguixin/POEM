@@ -1,0 +1,346 @@
+-----label-----
+1
+-----code-----
+void CWE615_Info_Exposure_by_Comment__w32_15_bad()
+{
+    switch(6)
+    {
+    case 6:
+    {
+        size_t passwordLen = 0;
+        HANDLE hUser;
+        char * domain = "Domain";
+        /* Use the password in LogonUser() to establish that it is "sensitive" */
+        if (LogonUserA(
+                    USERNAME,
+                    domain,
+                    PASSWORD,
+                    LOGON32_LOGON_NETWORK,
+                    LOGON32_PROVIDER_DEFAULT,
+                    &hUser) != 0)
+        {
+            /* FLAW: expose username and password in comment*/
+            /* Logged in XXXXX Smith using password ABCD1234 */
+            printLine("User logged in successfully" );
+            CloseHandle(hUser);
+        }
+        else
+        {
+            printLine("Unable to login.");
+        }
+    }
+    break;
+    default:
+        /* INCIDENTAL: CWE 561 Dead Code, the code below will never run */
+        printLine("Benign, fixed string");
+        break;
+    }
+}
+-----children-----
+1,2
+1,3
+1,4
+3,4
+5,6
+6,7
+6,8
+8,9
+8,10
+8,11
+8,12
+8,13
+8,14
+9,10
+11,12
+11,13
+11,14
+11,15
+12,13
+13,14
+13,15
+14,15
+16,17
+16,18
+18,19
+20,21
+21,22
+21,23
+22,23
+24,25
+26,27
+27,28
+27,29
+29,30
+29,31
+29,32
+32,33
+34,35
+34,36
+34,37
+35,36
+35,37
+36,37
+36,38
+36,39
+36,40
+36,41
+36,42
+36,43
+37,38
+39,40
+41,42
+43,44
+45,46
+47,48
+49,50
+50,51
+53,54
+53,55
+54,55
+55,56
+55,57
+56,57
+59,60
+60,61
+60,62
+61,62
+63,64
+65,66
+66,67
+67,68
+67,69
+68,69
+73,74
+74,75
+74,76
+75,76
+-----nextToken-----
+2,4,7,10,15,17,19,23,25,28,30,31,33,38,40,42,44,46,48,51,52,57,58,62,64,69,70,71,72,76,77,78
+-----computeFrom-----
+35,36
+35,37
+-----guardedBy-----
+51,64
+-----guardedByNegation-----
+-----lastLexicalUse-----
+-----jump-----
+-----attribute-----
+FunctionDefinition;SimpleDeclSpecifier;FunctionDeclarator;Name;CompoundStatement;SwitchStatement;LiteralExpression;CompoundStatement;CaseStatement;LiteralExpression;CompoundStatement;DeclarationStatement;SimpleDeclaration;NamedTypeSpecifier;Name;Declarator;Name;EqualsInitializer;LiteralExpression;DeclarationStatement;SimpleDeclaration;NamedTypeSpecifier;Name;Declarator;Name;DeclarationStatement;SimpleDeclaration;SimpleDeclSpecifier;Declarator;Pointer;Name;EqualsInitializer;LiteralExpression;IfStatement;BinaryExpression;FunctionCallExpression;IdExpression;Name;IdExpression;Name;IdExpression;Name;IdExpression;Name;IdExpression;Name;IdExpression;Name;UnaryExpression;IdExpression;Name;LiteralExpression;CompoundStatement;ExpressionStatement;FunctionCallExpression;IdExpression;Name;LiteralExpression;ExpressionStatement;FunctionCallExpression;IdExpression;Name;IdExpression;Name;CompoundStatement;ExpressionStatement;FunctionCallExpression;IdExpression;Name;LiteralExpression;BreakStatement;DefaultStatement;ExpressionStatement;FunctionCallExpression;IdExpression;Name;LiteralExpression;BreakStatement;
+-----ast_node-----
+void CWE615_Info_Exposure_by_Comment__w32_15_bad(){    switch(6)    {    case 6:    {        size_t passwordLen = 0;        HANDLE hUser;        char * domain = "Domain";        /* Use the password in LogonUser() to establish that it is "sensitive" */        if (LogonUserA(                    USERNAME,                    domain,                    PASSWORD,                    LOGON32_LOGON_NETWORK,                    LOGON32_PROVIDER_DEFAULT,                    &hUser) != 0)        {            /* FLAW: expose username and password in comment*/            /* Logged in XXXXX Smith using password ABCD1234 */            printLine("User logged in successfully" );            CloseHandle(hUser);        }        else        {            printLine("Unable to login.");        }    }    break;    default:        /* INCIDENTAL: CWE 561 Dead Code, the code below will never run */        printLine("Benign, fixed string");        break;    }}
+void
+CWE615_Info_Exposure_by_Comment__w32_15_bad()
+CWE615_Info_Exposure_by_Comment__w32_15_bad
+{    switch(6)    {    case 6:    {        size_t passwordLen = 0;        HANDLE hUser;        char * domain = "Domain";        /* Use the password in LogonUser() to establish that it is "sensitive" */        if (LogonUserA(                    USERNAME,                    domain,                    PASSWORD,                    LOGON32_LOGON_NETWORK,                    LOGON32_PROVIDER_DEFAULT,                    &hUser) != 0)        {            /* FLAW: expose username and password in comment*/            /* Logged in XXXXX Smith using password ABCD1234 */            printLine("User logged in successfully" );            CloseHandle(hUser);        }        else        {            printLine("Unable to login.");        }    }    break;    default:        /* INCIDENTAL: CWE 561 Dead Code, the code below will never run */        printLine("Benign, fixed string");        break;    }}
+switch(6)    {    case 6:    {        size_t passwordLen = 0;        HANDLE hUser;        char * domain = "Domain";        /* Use the password in LogonUser() to establish that it is "sensitive" */        if (LogonUserA(                    USERNAME,                    domain,                    PASSWORD,                    LOGON32_LOGON_NETWORK,                    LOGON32_PROVIDER_DEFAULT,                    &hUser) != 0)        {            /* FLAW: expose username and password in comment*/            /* Logged in XXXXX Smith using password ABCD1234 */            printLine("User logged in successfully" );            CloseHandle(hUser);        }        else        {            printLine("Unable to login.");        }    }    break;    default:        /* INCIDENTAL: CWE 561 Dead Code, the code below will never run */        printLine("Benign, fixed string");        break;    }
+6
+{    case 6:    {        size_t passwordLen = 0;        HANDLE hUser;        char * domain = "Domain";        /* Use the password in LogonUser() to establish that it is "sensitive" */        if (LogonUserA(                    USERNAME,                    domain,                    PASSWORD,                    LOGON32_LOGON_NETWORK,                    LOGON32_PROVIDER_DEFAULT,                    &hUser) != 0)        {            /* FLAW: expose username and password in comment*/            /* Logged in XXXXX Smith using password ABCD1234 */            printLine("User logged in successfully" );            CloseHandle(hUser);        }        else        {            printLine("Unable to login.");        }    }    break;    default:        /* INCIDENTAL: CWE 561 Dead Code, the code below will never run */        printLine("Benign, fixed string");        break;    }
+case 6:
+6
+{        size_t passwordLen = 0;        HANDLE hUser;        char * domain = "Domain";        /* Use the password in LogonUser() to establish that it is "sensitive" */        if (LogonUserA(                    USERNAME,                    domain,                    PASSWORD,                    LOGON32_LOGON_NETWORK,                    LOGON32_PROVIDER_DEFAULT,                    &hUser) != 0)        {            /* FLAW: expose username and password in comment*/            /* Logged in XXXXX Smith using password ABCD1234 */            printLine("User logged in successfully" );            CloseHandle(hUser);        }        else        {            printLine("Unable to login.");        }    }
+size_t passwordLen = 0;
+size_t passwordLen = 0;
+size_t
+size_t
+passwordLen = 0
+passwordLen
+= 0
+0
+HANDLE hUser;
+HANDLE hUser;
+HANDLE
+HANDLE
+hUser
+hUser
+char * domain = "Domain";
+char * domain = "Domain";
+char
+* domain = "Domain"
+*
+domain
+= "Domain"
+"Domain"
+if (LogonUserA(                    USERNAME,                    domain,                    PASSWORD,                    LOGON32_LOGON_NETWORK,                    LOGON32_PROVIDER_DEFAULT,                    &hUser) != 0)        {            /* FLAW: expose username and password in comment*/            /* Logged in XXXXX Smith using password ABCD1234 */            printLine("User logged in successfully" );            CloseHandle(hUser);        }        else        {            printLine("Unable to login.");        }
+LogonUserA(                    USERNAME,                    domain,                    PASSWORD,                    LOGON32_LOGON_NETWORK,                    LOGON32_PROVIDER_DEFAULT,                    &hUser) != 0
+LogonUserA(                    USERNAME,                    domain,                    PASSWORD,                    LOGON32_LOGON_NETWORK,                    LOGON32_PROVIDER_DEFAULT,                    &hUser)
+LogonUserA
+LogonUserA
+USERNAME
+USERNAME
+domain
+domain
+PASSWORD
+PASSWORD
+LOGON32_LOGON_NETWORK
+LOGON32_LOGON_NETWORK
+LOGON32_PROVIDER_DEFAULT
+LOGON32_PROVIDER_DEFAULT
+&hUser
+hUser
+hUser
+0
+{            /* FLAW: expose username and password in comment*/            /* Logged in XXXXX Smith using password ABCD1234 */            printLine("User logged in successfully" );            CloseHandle(hUser);        }
+printLine("User logged in successfully" );
+printLine("User logged in successfully" )
+printLine
+printLine
+"User logged in successfully"
+CloseHandle(hUser);
+CloseHandle(hUser)
+CloseHandle
+CloseHandle
+hUser
+hUser
+{            printLine("Unable to login.");        }
+printLine("Unable to login.");
+printLine("Unable to login.")
+printLine
+printLine
+"Unable to login."
+break;
+default:
+printLine("Benign, fixed string");
+printLine("Benign, fixed string")
+printLine
+printLine
+"Benign, fixed string"
+break;
+-----joern-----
+(30,24,0)
+(11,30,0)
+(22,34,0)
+(27,34,0)
+(2,21,0)
+(36,0,0)
+(15,22,0)
+(10,30,0)
+(19,15,0)
+(9,14,0)
+(24,30,0)
+(32,35,0)
+(7,29,0)
+(14,30,0)
+(6,34,0)
+(17,7,0)
+(31,29,0)
+(26,15,0)
+(30,14,0)
+(18,22,0)
+(0,22,0)
+(8,30,0)
+(33,31,0)
+(25,34,0)
+(21,34,0)
+(37,30,0)
+(16,0,0)
+(13,22,0)
+(3,24,0)
+(4,1,0)
+(30,0,0)
+(12,22,0)
+(23,30,0)
+(28,34,0)
+(1,38,0)
+(5,22,0)
+(9,30,1)
+(39,27,1)
+(15,19,1)
+(16,15,1)
+(28,1,1)
+(10,8,1)
+(0,36,1)
+(4,14,1)
+(30,0,1)
+(36,16,1)
+(1,4,1)
+(33,7,1)
+(21,2,1)
+(26,20,1)
+(19,26,1)
+(27,21,1)
+(28,31,1)
+(14,30,1)
+(31,33,1)
+(24,3,1)
+(7,17,1)
+(39,28,1)
+(8,0,1)
+(14,9,1)
+(23,11,1)
+(2,20,1)
+(3,23,1)
+(11,37,1)
+(30,24,1)
+(17,14,1)
+(37,10,1)
+(21,20,2)
+(0,20,2)
+(14,30,2)
+(30,24,2)
+(8,20,2)
+(3,20,2)
+(26,20,2)
+(33,14,2)
+(37,20,2)
+(17,14,2)
+(31,14,2)
+(16,20,2)
+(11,20,2)
+(19,20,2)
+(28,20,2)
+(14,20,2)
+(27,20,2)
+(36,20,2)
+(23,20,2)
+(7,14,2)
+(15,20,2)
+(1,14,2)
+(9,20,2)
+(30,0,2)
+(2,20,2)
+(4,14,2)
+(24,20,2)
+(30,20,2)
+(10,20,2)
+-----------------------------------
+(0,* domain = "Domain")
+(1,printLine("Unable to login.")
+(2,"Benign, fixed string")
+(3,hUser)
+(4,"Unable to login.")
+(5,hUser)
+(6,case 6:)
+(7,printLine("User logged in successfully" )
+(8,USERNAME)
+(9,0)
+(10,domain)
+(11,LOGON32_LOGON_NETWORK)
+(12,domain)
+(13,passwordLen)
+(14,LogonUserA(\\\\n                    USERNAME,\\\\n                    domain,\\\\n                    PASSWORD,\\\\n                    LOGON32_LOGON_NETWORK,\\\\n                    LOGON32_PROVIDER_DEFAULT,\\\\n                    &hUser)
+(15,passwordLen = 0)
+(16,domain)
+(17,"User logged in successfully")
+(18,if (LogonUserA(\\\\n                    USERNAME,\\\\n                    domain,\\\\n                    PASSWORD,\\\\n                    LOGON32_LOGON_NETWORK,\\\\n                    LOGON32_PROVIDER_DEFAULT,\\\\n                    &hUser)
+(19,0)
+(20,6)
+(21,printLine("Benign, fixed string")
+(22,)
+(23,LOGON32_PROVIDER_DEFAULT)
+(24,&hUser)
+(25,default:)
+(26,passwordLen)
+(27,break;)
+(28,break;)
+(29,)
+(30,LogonUserA(\\\\n                    USERNAME,\\\\n                    domain,\\\\n                    PASSWORD,\\\\n                    LOGON32_LOGON_NETWORK,\\\\n                    LOGON32_PROVIDER_DEFAULT,\\\\n                    &hUser)
+(31,CloseHandle(hUser)
+(32,switch(6)
+(33,hUser)
+(34,)
+(35,)
+(36,"Domain")
+(37,PASSWORD)
+(38,)
+(39,RET)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

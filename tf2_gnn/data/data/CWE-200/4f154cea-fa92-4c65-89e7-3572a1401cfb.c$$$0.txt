@@ -1,0 +1,82 @@
+-----label-----
+1
+-----code-----
+void CWE526_Info_Exposure_Environment_Variables__basic_08_bad()
+{
+    if(staticReturnsTrue())
+    {
+        /* FLAW: environment variable exposed */
+        printLine(getenv("PATH"));
+    }
+}
+-----children-----
+1,2
+1,3
+1,4
+3,4
+5,6
+6,7
+6,8
+7,8
+8,9
+10,11
+11,12
+12,13
+12,14
+13,14
+15,16
+15,17
+16,17
+-----nextToken-----
+2,4,9,14,17,18
+-----computeFrom-----
+-----guardedBy-----
+-----guardedByNegation-----
+-----lastLexicalUse-----
+-----jump-----
+-----attribute-----
+FunctionDefinition;SimpleDeclSpecifier;FunctionDeclarator;Name;CompoundStatement;IfStatement;FunctionCallExpression;IdExpression;Name;CompoundStatement;ExpressionStatement;FunctionCallExpression;IdExpression;Name;FunctionCallExpression;IdExpression;Name;LiteralExpression;
+-----ast_node-----
+void CWE526_Info_Exposure_Environment_Variables__basic_08_bad(){    if(staticReturnsTrue())    {        /* FLAW: environment variable exposed */        printLine(getenv("PATH"));    }}
+void
+CWE526_Info_Exposure_Environment_Variables__basic_08_bad()
+CWE526_Info_Exposure_Environment_Variables__basic_08_bad
+{    if(staticReturnsTrue())    {        /* FLAW: environment variable exposed */        printLine(getenv("PATH"));    }}
+if(staticReturnsTrue())    {        /* FLAW: environment variable exposed */        printLine(getenv("PATH"));    }
+staticReturnsTrue()
+staticReturnsTrue
+staticReturnsTrue
+{        /* FLAW: environment variable exposed */        printLine(getenv("PATH"));    }
+printLine(getenv("PATH"));
+printLine(getenv("PATH"))
+printLine
+printLine
+getenv("PATH")
+getenv
+getenv
+"PATH"
+-----joern-----
+(5,1,0)
+(0,2,0)
+(4,7,0)
+(5,7,0)
+(7,5,0)
+(3,6,1)
+(7,4,1)
+(4,6,1)
+(5,7,1)
+(3,5,1)
+(7,6,2)
+(5,7,2)
+(4,6,2)
+(5,6,2)
+-----------------------------------
+(0,if(staticReturnsTrue()
+(1,)
+(2,)
+(3,RET)
+(4,"PATH")
+(5,printLine(getenv("PATH")
+(6,staticReturnsTrue()
+(7,getenv("PATH")
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

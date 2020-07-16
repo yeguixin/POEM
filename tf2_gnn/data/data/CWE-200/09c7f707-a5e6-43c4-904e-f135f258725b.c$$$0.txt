@@ -1,0 +1,665 @@
+-----label-----
+0
+-----code-----
+static void good1()
+{
+    if(staticFalse)
+    {
+        /* INCIDENTAL: CWE 561 Dead Code, the code below will never run */
+        printLine("Benign, fixed string");
+    }
+    else
+    {
+        {
+            wchar_t password[100] = L"";
+            size_t passwordLen = 0;
+            HANDLE hUser;
+            wchar_t * username = L"User";
+            wchar_t * domain = L"Domain";
+            if (fgetws(password, 100, stdin) == NULL)
+            {
+                printLine("fgetws() failed");
+                /* Restore NUL terminator if fgetws fails */
+                password[0] = L'\0';
+            }
+            /* Remove the carriage return from the string that is inserted by fgetws() */
+            passwordLen = wcslen(password);
+            if (passwordLen > 0)
+            {
+                password[passwordLen-1] = L'\0';
+            }
+            /* Use the password in LogonUser() to establish that it is "sensitive" */
+            if (LogonUserW(
+                        username,
+                        domain,
+                        password,
+                        LOGON32_LOGON_NETWORK,
+                        LOGON32_PROVIDER_DEFAULT,
+                        &hUser) != 0)
+            {
+                printLine("User logged in successfully.");
+                CloseHandle(hUser);
+            }
+            else
+            {
+                printLine("Unable to login.");
+            }
+            passwordLen = wcslen(password);
+            /* FIX: Clear password prior to release from stack */
+            SecureZeroMemory(password, passwordLen * sizeof(wchar_t));
+        }
+    }
+}
+-----children-----
+1,2
+1,3
+1,4
+3,4
+5,6
+6,7
+6,8
+6,9
+7,8
+9,10
+10,11
+11,12
+11,13
+12,13
+15,16
+16,17
+16,18
+16,19
+16,20
+16,21
+16,22
+16,23
+16,24
+16,25
+16,26
+16,27
+17,18
+18,19
+18,20
+20,21
+20,22
+20,23
+22,23
+24,25
+26,27
+27,28
+27,29
+28,29
+30,31
+30,32
+32,33
+34,35
+35,36
+35,37
+36,37
+38,39
+40,41
+41,42
+41,43
+43,44
+43,45
+43,46
+46,47
+48,49
+49,50
+49,51
+51,52
+51,53
+51,54
+54,55
+56,57
+56,58
+57,58
+57,59
+58,59
+58,60
+58,61
+58,62
+59,60
+61,62
+64,65
+66,67
+68,69
+68,70
+69,70
+70,71
+70,72
+71,72
+74,75
+75,76
+75,77
+76,77
+76,78
+77,78
+81,82
+82,83
+82,84
+83,84
+85,86
+85,87
+86,87
+88,89
+90,91
+90,92
+91,92
+91,93
+92,93
+95,96
+96,97
+97,98
+97,99
+98,99
+98,100
+99,100
+101,102
+101,103
+102,103
+106,107
+106,108
+106,109
+107,108
+107,109
+108,109
+108,110
+108,111
+108,112
+108,113
+108,114
+108,115
+109,110
+111,112
+113,114
+115,116
+117,118
+119,120
+121,122
+122,123
+125,126
+125,127
+126,127
+127,128
+127,129
+128,129
+131,132
+132,133
+132,134
+133,134
+135,136
+137,138
+138,139
+139,140
+139,141
+140,141
+143,144
+144,145
+144,146
+145,146
+147,148
+147,149
+148,149
+150,151
+152,153
+153,154
+153,155
+153,156
+154,155
+156,157
+158,159
+158,160
+159,160
+161,162
+162,163
+162,164
+-----nextToken-----
+2,4,8,13,14,19,21,23,25,29,31,33,37,39,42,44,45,47,50,52,53,55,60,62,63,65,67,72,73,78,79,80,84,87,89,93,94,100,103,104,105,110,112,114,116,118,120,123,124,129,130,134,136,141,142,146,149,151,155,157,160,163,164
+-----computeFrom-----
+57,58
+57,59
+75,76
+75,77
+82,83
+82,84
+91,92
+91,93
+97,98
+97,99
+101,102
+101,103
+107,108
+107,109
+144,145
+144,146
+158,159
+158,160
+-----guardedBy-----
+62,78
+93,103
+123,136
+-----guardedByNegation-----
+-----lastLexicalUse-----
+-----jump-----
+-----attribute-----
+FunctionDefinition;SimpleDeclSpecifier;FunctionDeclarator;Name;CompoundStatement;IfStatement;IdExpression;Name;CompoundStatement;ExpressionStatement;FunctionCallExpression;IdExpression;Name;LiteralExpression;CompoundStatement;CompoundStatement;DeclarationStatement;SimpleDeclaration;SimpleDeclSpecifier;ArrayDeclarator;Name;ArrayModifier;LiteralExpression;EqualsInitializer;LiteralExpression;DeclarationStatement;SimpleDeclaration;NamedTypeSpecifier;Name;Declarator;Name;EqualsInitializer;LiteralExpression;DeclarationStatement;SimpleDeclaration;NamedTypeSpecifier;Name;Declarator;Name;DeclarationStatement;SimpleDeclaration;SimpleDeclSpecifier;Declarator;Pointer;Name;EqualsInitializer;LiteralExpression;DeclarationStatement;SimpleDeclaration;SimpleDeclSpecifier;Declarator;Pointer;Name;EqualsInitializer;LiteralExpression;IfStatement;BinaryExpression;FunctionCallExpression;IdExpression;Name;IdExpression;Name;LiteralExpression;IdExpression;Name;IdExpression;Name;CompoundStatement;ExpressionStatement;FunctionCallExpression;IdExpression;Name;LiteralExpression;ExpressionStatement;BinaryExpression;ArraySubscriptExpression;IdExpression;Name;LiteralExpression;LiteralExpression;ExpressionStatement;BinaryExpression;IdExpression;Name;FunctionCallExpression;IdExpression;Name;IdExpression;Name;IfStatement;BinaryExpression;IdExpression;Name;LiteralExpression;CompoundStatement;ExpressionStatement;BinaryExpression;ArraySubscriptExpression;IdExpression;Name;BinaryExpression;IdExpression;Name;LiteralExpression;LiteralExpression;IfStatement;BinaryExpression;FunctionCallExpression;IdExpression;Name;IdExpression;Name;IdExpression;Name;IdExpression;Name;IdExpression;Name;IdExpression;Name;UnaryExpression;IdExpression;Name;LiteralExpression;CompoundStatement;ExpressionStatement;FunctionCallExpression;IdExpression;Name;LiteralExpression;ExpressionStatement;FunctionCallExpression;IdExpression;Name;IdExpression;Name;CompoundStatement;ExpressionStatement;FunctionCallExpression;IdExpression;Name;LiteralExpression;ExpressionStatement;BinaryExpression;IdExpression;Name;FunctionCallExpression;IdExpression;Name;IdExpression;Name;ExpressionStatement;FunctionCallExpression;IdExpression;Name;IdExpression;Name;BinaryExpression;IdExpression;Name;TypeIdExpression;TypeId;SimpleDeclSpecifier;Declarator;
+-----ast_node-----
+static void good1(){    if(staticFalse)    {        /* INCIDENTAL: CWE 561 Dead Code, the code below will never run */        printLine("Benign, fixed string");    }    else    {        {            wchar_t password[100] = L"";            size_t passwordLen = 0;            HANDLE hUser;            wchar_t * username = L"User";            wchar_t * domain = L"Domain";            if (fgetws(password, 100, stdin) == NULL)            {                printLine("fgetws() failed");                /* Restore NUL terminator if fgetws fails */                password[0] = L'\0';            }            /* Remove the carriage return from the string that is inserted by fgetws() */            passwordLen = wcslen(password);            if (passwordLen > 0)            {                password[passwordLen-1] = L'\0';            }            /* Use the password in LogonUser() to establish that it is "sensitive" */            if (LogonUserW(                        username,                        domain,                        password,                        LOGON32_LOGON_NETWORK,                        LOGON32_PROVIDER_DEFAULT,                        &hUser) != 0)            {                printLine("User logged in successfully.");                CloseHandle(hUser);            }            else            {                printLine("Unable to login.");            }            passwordLen = wcslen(password);            /* FIX: Clear password prior to release from stack */            SecureZeroMemory(password, passwordLen * sizeof(wchar_t));        }    }}
+static void
+good1()
+good1
+{    if(staticFalse)    {        /* INCIDENTAL: CWE 561 Dead Code, the code below will never run */        printLine("Benign, fixed string");    }    else    {        {            wchar_t password[100] = L"";            size_t passwordLen = 0;            HANDLE hUser;            wchar_t * username = L"User";            wchar_t * domain = L"Domain";            if (fgetws(password, 100, stdin) == NULL)            {                printLine("fgetws() failed");                /* Restore NUL terminator if fgetws fails */                password[0] = L'\0';            }            /* Remove the carriage return from the string that is inserted by fgetws() */            passwordLen = wcslen(password);            if (passwordLen > 0)            {                password[passwordLen-1] = L'\0';            }            /* Use the password in LogonUser() to establish that it is "sensitive" */            if (LogonUserW(                        username,                        domain,                        password,                        LOGON32_LOGON_NETWORK,                        LOGON32_PROVIDER_DEFAULT,                        &hUser) != 0)            {                printLine("User logged in successfully.");                CloseHandle(hUser);            }            else            {                printLine("Unable to login.");            }            passwordLen = wcslen(password);            /* FIX: Clear password prior to release from stack */            SecureZeroMemory(password, passwordLen * sizeof(wchar_t));        }    }}
+if(staticFalse)    {        /* INCIDENTAL: CWE 561 Dead Code, the code below will never run */        printLine("Benign, fixed string");    }    else    {        {            wchar_t password[100] = L"";            size_t passwordLen = 0;            HANDLE hUser;            wchar_t * username = L"User";            wchar_t * domain = L"Domain";            if (fgetws(password, 100, stdin) == NULL)            {                printLine("fgetws() failed");                /* Restore NUL terminator if fgetws fails */                password[0] = L'\0';            }            /* Remove the carriage return from the string that is inserted by fgetws() */            passwordLen = wcslen(password);            if (passwordLen > 0)            {                password[passwordLen-1] = L'\0';            }            /* Use the password in LogonUser() to establish that it is "sensitive" */            if (LogonUserW(                        username,                        domain,                        password,                        LOGON32_LOGON_NETWORK,                        LOGON32_PROVIDER_DEFAULT,                        &hUser) != 0)            {                printLine("User logged in successfully.");                CloseHandle(hUser);            }            else            {                printLine("Unable to login.");            }            passwordLen = wcslen(password);            /* FIX: Clear password prior to release from stack */            SecureZeroMemory(password, passwordLen * sizeof(wchar_t));        }    }
+staticFalse
+staticFalse
+{        /* INCIDENTAL: CWE 561 Dead Code, the code below will never run */        printLine("Benign, fixed string");    }
+printLine("Benign, fixed string");
+printLine("Benign, fixed string")
+printLine
+printLine
+"Benign, fixed string"
+{        {            wchar_t password[100] = L"";            size_t passwordLen = 0;            HANDLE hUser;            wchar_t * username = L"User";            wchar_t * domain = L"Domain";            if (fgetws(password, 100, stdin) == NULL)            {                printLine("fgetws() failed");                /* Restore NUL terminator if fgetws fails */                password[0] = L'\0';            }            /* Remove the carriage return from the string that is inserted by fgetws() */            passwordLen = wcslen(password);            if (passwordLen > 0)            {                password[passwordLen-1] = L'\0';            }            /* Use the password in LogonUser() to establish that it is "sensitive" */            if (LogonUserW(                        username,                        domain,                        password,                        LOGON32_LOGON_NETWORK,                        LOGON32_PROVIDER_DEFAULT,                        &hUser) != 0)            {                printLine("User logged in successfully.");                CloseHandle(hUser);            }            else            {                printLine("Unable to login.");            }            passwordLen = wcslen(password);            /* FIX: Clear password prior to release from stack */            SecureZeroMemory(password, passwordLen * sizeof(wchar_t));        }    }
+{            wchar_t password[100] = L"";            size_t passwordLen = 0;            HANDLE hUser;            wchar_t * username = L"User";            wchar_t * domain = L"Domain";            if (fgetws(password, 100, stdin) == NULL)            {                printLine("fgetws() failed");                /* Restore NUL terminator if fgetws fails */                password[0] = L'\0';            }            /* Remove the carriage return from the string that is inserted by fgetws() */            passwordLen = wcslen(password);            if (passwordLen > 0)            {                password[passwordLen-1] = L'\0';            }            /* Use the password in LogonUser() to establish that it is "sensitive" */            if (LogonUserW(                        username,                        domain,                        password,                        LOGON32_LOGON_NETWORK,                        LOGON32_PROVIDER_DEFAULT,                        &hUser) != 0)            {                printLine("User logged in successfully.");                CloseHandle(hUser);            }            else            {                printLine("Unable to login.");            }            passwordLen = wcslen(password);            /* FIX: Clear password prior to release from stack */            SecureZeroMemory(password, passwordLen * sizeof(wchar_t));        }
+wchar_t password[100] = L"";
+wchar_t password[100] = L"";
+wchar_t
+password[100] = L""
+password
+[100]
+100
+= L""
+L""
+size_t passwordLen = 0;
+size_t passwordLen = 0;
+size_t
+size_t
+passwordLen = 0
+passwordLen
+= 0
+0
+HANDLE hUser;
+HANDLE hUser;
+HANDLE
+HANDLE
+hUser
+hUser
+wchar_t * username = L"User";
+wchar_t * username = L"User";
+wchar_t
+* username = L"User"
+*
+username
+= L"User"
+L"User"
+wchar_t * domain = L"Domain";
+wchar_t * domain = L"Domain";
+wchar_t
+* domain = L"Domain"
+*
+domain
+= L"Domain"
+L"Domain"
+if (fgetws(password, 100, stdin) == NULL)            {                printLine("fgetws() failed");                /* Restore NUL terminator if fgetws fails */                password[0] = L'\0';            }
+fgetws(password, 100, stdin) == NULL
+fgetws(password, 100, stdin)
+fgetws
+fgetws
+password
+password
+100
+stdin
+stdin
+NULL
+NULL
+{                printLine("fgetws() failed");                /* Restore NUL terminator if fgetws fails */                password[0] = L'\0';            }
+printLine("fgetws() failed");
+printLine("fgetws() failed")
+printLine
+printLine
+"fgetws() failed"
+password[0] = L'\0';
+password[0] = L'\0'
+password[0]
+password
+password
+0
+L'\0'
+passwordLen = wcslen(password);
+passwordLen = wcslen(password)
+passwordLen
+passwordLen
+wcslen(password)
+wcslen
+wcslen
+password
+password
+if (passwordLen > 0)            {                password[passwordLen-1] = L'\0';            }
+passwordLen > 0
+passwordLen
+passwordLen
+0
+{                password[passwordLen-1] = L'\0';            }
+password[passwordLen-1] = L'\0';
+password[passwordLen-1] = L'\0'
+password[passwordLen-1]
+password
+password
+passwordLen-1
+passwordLen
+passwordLen
+1
+L'\0'
+if (LogonUserW(                        username,                        domain,                        password,                        LOGON32_LOGON_NETWORK,                        LOGON32_PROVIDER_DEFAULT,                        &hUser) != 0)            {                printLine("User logged in successfully.");                CloseHandle(hUser);            }            else            {                printLine("Unable to login.");            }
+LogonUserW(                        username,                        domain,                        password,                        LOGON32_LOGON_NETWORK,                        LOGON32_PROVIDER_DEFAULT,                        &hUser) != 0
+LogonUserW(                        username,                        domain,                        password,                        LOGON32_LOGON_NETWORK,                        LOGON32_PROVIDER_DEFAULT,                        &hUser)
+LogonUserW
+LogonUserW
+username
+username
+domain
+domain
+password
+password
+LOGON32_LOGON_NETWORK
+LOGON32_LOGON_NETWORK
+LOGON32_PROVIDER_DEFAULT
+LOGON32_PROVIDER_DEFAULT
+&hUser
+hUser
+hUser
+0
+{                printLine("User logged in successfully.");                CloseHandle(hUser);            }
+printLine("User logged in successfully.");
+printLine("User logged in successfully.")
+printLine
+printLine
+"User logged in successfully."
+CloseHandle(hUser);
+CloseHandle(hUser)
+CloseHandle
+CloseHandle
+hUser
+hUser
+{                printLine("Unable to login.");            }
+printLine("Unable to login.");
+printLine("Unable to login.")
+printLine
+printLine
+"Unable to login."
+passwordLen = wcslen(password);
+passwordLen = wcslen(password)
+passwordLen
+passwordLen
+wcslen(password)
+wcslen
+wcslen
+password
+password
+SecureZeroMemory(password, passwordLen * sizeof(wchar_t));
+SecureZeroMemory(password, passwordLen * sizeof(wchar_t))
+SecureZeroMemory
+SecureZeroMemory
+password
+password
+passwordLen * sizeof(wchar_t)
+passwordLen
+passwordLen
+sizeof(wchar_t)
+wchar_t
+wchar_t
+
+-----joern-----
+(19,62,0)
+(51,7,0)
+(14,55,0)
+(3,36,0)
+(19,55,0)
+(33,30,0)
+(2,29,0)
+(34,19,0)
+(14,56,0)
+(66,55,0)
+(54,48,0)
+(60,42,0)
+(62,19,0)
+(21,26,0)
+(32,42,0)
+(24,25,0)
+(52,46,0)
+(49,55,0)
+(27,58,0)
+(46,50,0)
+(25,30,0)
+(59,65,0)
+(23,30,0)
+(18,55,0)
+(13,55,0)
+(10,45,0)
+(40,51,0)
+(31,55,0)
+(64,55,0)
+(30,38,0)
+(6,55,0)
+(42,58,0)
+(44,30,0)
+(16,34,0)
+(37,35,0)
+(20,55,0)
+(5,43,0)
+(1,30,0)
+(30,25,0)
+(12,34,0)
+(43,36,0)
+(53,30,0)
+(41,49,0)
+(11,28,0)
+(57,49,0)
+(35,4,0)
+(48,50,0)
+(15,55,0)
+(56,14,0)
+(26,43,0)
+(45,29,0)
+(17,19,0)
+(0,38,0)
+(43,14,0)
+(58,42,0)
+(36,55,0)
+(36,43,0)
+(63,42,0)
+(9,62,0)
+(47,56,0)
+(43,26,0)
+(39,14,0)
+(38,30,0)
+(55,61,0)
+(36,43,1)
+(20,31,1)
+(23,11,1)
+(10,58,1)
+(16,19,1)
+(5,3,1)
+(58,27,1)
+(9,17,1)
+(63,32,1)
+(43,26,1)
+(38,30,1)
+(43,14,1)
+(32,20,1)
+(52,38,1)
+(26,21,1)
+(40,38,1)
+(11,34,1)
+(0,30,1)
+(39,48,1)
+(62,9,1)
+(23,34,1)
+(31,49,1)
+(35,37,1)
+(22,35,1)
+(27,42,1)
+(25,24,1)
+(17,2,1)
+(1,53,1)
+(45,10,1)
+(48,54,1)
+(34,12,1)
+(14,56,1)
+(51,40,1)
+(53,44,1)
+(34,19,1)
+(46,52,1)
+(54,46,1)
+(12,16,1)
+(42,60,1)
+(57,6,1)
+(37,8,1)
+(56,47,1)
+(19,62,1)
+(33,23,1)
+(49,41,1)
+(44,33,1)
+(39,51,1)
+(6,8,1)
+(2,45,1)
+(47,39,1)
+(17,58,1)
+(24,1,1)
+(60,63,1)
+(30,25,1)
+(3,14,1)
+(21,5,1)
+(22,36,1)
+(58,42,1)
+(38,0,1)
+(41,57,1)
+(44,8,2)
+(5,8,2)
+(48,38,2)
+(40,38,2)
+(31,8,2)
+(52,38,2)
+(56,8,2)
+(10,58,2)
+(46,38,2)
+(3,8,2)
+(19,62,2)
+(49,8,2)
+(1,8,2)
+(60,8,2)
+(11,34,2)
+(54,38,2)
+(51,38,2)
+(43,26,2)
+(19,8,2)
+(36,8,2)
+(9,8,2)
+(14,8,2)
+(34,19,2)
+(35,8,2)
+(23,8,2)
+(45,58,2)
+(26,8,2)
+(42,8,2)
+(63,8,2)
+(47,8,2)
+(17,8,2)
+(20,8,2)
+(41,8,2)
+(30,25,2)
+(30,8,2)
+(43,8,2)
+(12,8,2)
+(25,8,2)
+(14,56,2)
+(39,8,2)
+(53,8,2)
+(16,8,2)
+(36,43,2)
+(43,14,2)
+(38,30,2)
+(57,8,2)
+(62,8,2)
+(33,8,2)
+(21,8,2)
+(38,8,2)
+(24,8,2)
+(6,8,2)
+(27,8,2)
+(34,8,2)
+(2,58,2)
+(37,8,2)
+(0,8,2)
+(58,42,2)
+(32,8,2)
+(58,8,2)
+-----------------------------------
+(0,0)
+(1,LOGON32_PROVIDER_DEFAULT)
+(2,\\\'\\\\0\\\')
+(3,password)
+(4,)
+(5,passwordLen)
+(6,"")
+(7,)
+(8,staticFalse)
+(9,password)
+(10,"fgetws()
+(11,\\\'\\\\0\\\')
+(12,0)
+(13,if (LogonUserW(\\\\n                        username,\\\\n                        domain,\\\\n                        password,\\\\n                        LOGON32_LOGON_NETWORK,\\\\n                        LOGON32_PROVIDER_DEFAULT,\\\\n                        &hUser)
+(14,passwordLen = wcslen(password)
+(15,if (passwordLen > 0)
+(16,passwordLen)
+(17,passwordLen)
+(18,if (fgetws(password, 100, stdin)
+(19,passwordLen = wcslen(password)
+(20,"Domain")
+(21,wchar_t)
+(22,RET)
+(23,username)
+(24,hUser)
+(25,&hUser)
+(26,sizeof(wchar_t)
+(27,NULL)
+(28,)
+(29,)
+(30,LogonUserW(\\\\n                        username,\\\\n                        domain,\\\\n                        password,\\\\n                        LOGON32_LOGON_NETWORK,\\\\n                        LOGON32_PROVIDER_DEFAULT,\\\\n                        &hUser)
+(31,"User")
+(32,password)
+(33,domain)
+(34,passwordLen > 0)
+(35,printLine("Benign, fixed string")
+(36,SecureZeroMemory(password, passwordLen * sizeof(wchar_t)
+(37,"Benign, fixed string")
+(38,LogonUserW(\\\\n                        username,\\\\n                        domain,\\\\n                        password,\\\\n                        LOGON32_LOGON_NETWORK,\\\\n                        LOGON32_PROVIDER_DEFAULT,\\\\n                        &hUser)
+(39,passwordLen)
+(40,"Unable to login.")
+(41,0)
+(42,fgetws(password, 100, stdin)
+(43,passwordLen * sizeof(wchar_t)
+(44,password)
+(45,printLine("fgetws()
+(46,printLine("User logged in successfully.")
+(47,password)
+(48,CloseHandle(hUser)
+(49,passwordLen = 0)
+(50,)
+(51,printLine("Unable to login.")
+(52,"User logged in successfully.")
+(53,LOGON32_LOGON_NETWORK)
+(54,hUser)
+(55,)
+(56,wcslen(password)
+(57,passwordLen)
+(58,fgetws(password, 100, stdin)
+(59,if(staticFalse)
+(60,stdin)
+(61,)
+(62,wcslen(password)
+(63,100)
+(64,passwordLen)
+(65,)
+(66,hUser)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
