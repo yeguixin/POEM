@@ -28,3 +28,16 @@ consistently outperforms all competing methods across evaluation settings.
 
 # Usage
 
+
+
+
+# Citation
+```
+@inproceedings{ye2020deep,
+  title={Deep Program Structure Modeling Through Multi-Relational Graph-based Learning},
+  author={Ye, Guixin and Tang, Zhanyong and Wang, Huanting and Fang, Dingyi and Fang, Jianbin and Huang, Songfang and Wang, Zheng},
+  booktitle={Proceedings of the ACM International Conference on Parallel Architectures and Compilation Techniques},
+  pages={111--123},
+  year={2020}
+}
+```
