@@ -1,5 +1,5 @@
 # POEM
-POEM is a deep program structure modeling framework by leveraging the multi-relational graph neural network. It can capture the deep program semantic and structural features for code representation. We evaluated POEM by applying it to four representative tasks: heterogeneous device mapping, GPU thread coarsening, loop vectorization and code vul- nerability detection, and it gives the better performance than SOTA methods.
+POEM is a deep program structure modeling framework by leveraging a multi-relational graph neural network. It is built upon [tf2-gnn](https://github.com/microsoft/tf2-gnn), a graph neural network. POEM can capture the deep program semantic and structural features for code representation. We evaluated POEM by applying it to four representative tasks: heterogeneous device mapping, GPU thread coarsening, loop vectorization and code vul- nerability detection, and it gives the better performance than SOTA methods.
 For more details, please refer to our [paper](https://dl.acm.org/doi/abs/10.1145/3410463.3414670), "Deep Program Structure Modeling Through Multi-Relational Graph-based Learning", which appeared in PACT 2020.
 
 ## Abstract
@@ -22,62 +22,59 @@ written in OpenCL, C, Java and Swift, and compare it against nine learning-based
 consistently outperforms all competing methods across evaluation settings.
 
 
-## 软件架构
-软件以tf-gnn为基, 
+## Installation
 
-
-## 安装教程
-
-POEM可在运行带有NVIDIA图形卡的Linux的计算机上工作。它已在运行带有GTX Titan XP GPU的Ubuntu 20.04的计算机上进行了测试。  
-- 具体安装这里利用conda创建python运行环境, 具体命令如下
+POEM works on a machine running Linux with NVIDIA GPUs. The primary evaluations are conducted on a Linux server running Ubuntu 16.04 with a NVIDIA GTX Titan XP GPU.
+Python 3.6 and Tensorflow 2.0.0 with CUDA are required to run POEM. Please refer to [this link](https://developer.nvidia.com/cuda-toolkit-archive) for installing CUDA Toolkits.
+To get ready for running POEM, please additionally run the following commands:
 
 ```sh
-conda create -n poem python=3.6
-conda activate poem
-git clone POEM的GitHub链接
-cd poem/src
-pip install -e ./ # 安装当前文件中的tf2-gnn到环境中
-pip install -r req.txt # 加载其他相关包
+$ conda create -n poem python=3.6
+$ conda activate poem
+$ git clone https://github.com/yeguixin/POEM.git
+$ cd poem/src
+$ pip install -e ./     /* installing multi-gnn  */
+pip install -r req.txt  /* installing the requirements   */
 ```
 
-## 数据集
-数据集已经上传到网络云盘([点击这里进行下载, 提取码ntt6](https://pan.baidu.com/s/1QHyoCf0E7am1e2DfJTrv1w))  
-下载后放置 `poem/data/data.zip`  
-使用命令进行解压 `cd poem/data/ && unzip data.zip`
-> `case1` 数据说明  
-- case1的数据集中有三个数据集, amd/nvidia/1w zip文件分别是小数据集在amd/nvidia平台标记的数据集, 1w是大数据集在nvidia平台上标记的数据集 
-- 对应的三个csv文件分别是上述中, 对比实验和相关参数表
-
-> `case2` 数据说明
-- `caseb_128.npy`文件是处理打包后的数据集 
-- csv文件是实验数据相关参数表
-
-> `case3` 数据说明
-- 三套gz文件, 分别表示辅助输入数据集, for循环次数数据集, 和cdfg边数据集
-
-## 使用说明
-本文包含四个case, 
-
-> `case1` 使用说明
-- 路径: `poem/src/tf2_gnn/case1_cli/`
-- 配置case1代码: `source 00_set_case1.sh` 
-- 训练模型: `source 01_run_get_model.sh`
-- 重载模型: `source 02_rerun_to_get_result.sh`
-
-> `case2` 使用说明
-- 路径: `poem/src/tf2_gnn/case2_cli/`
-- 训练和测试: `python caseB-embedding-transfer.py`
+## Dataset
+The dataset used in our experiments are avaliable on our cloud disk by clicking the [archive link](https://pan.baidu.com/s/1QHyoCf0E7am1e2DfJTrv1w) or [the link](https://pan.baidu.com/s/1QHyoCf0E7am1e2DfJTrv1w) for our domestic users. The detailed usage of our dataset refers to [here](./data/README.md).
 
 
-> `case3` 使用说明
-- 路径: `poem/src/tf2_gnn/case3_cli/`
-- 配置case1代码: `source 00_set_caseFile.sh` 
-- 训练模型: `source 01_run_get_model.sh`
-- 重载模型: `source 02_rerun_to_get_result.sh`
+## Running
 
-> `case4`  
-- case4涉及到的代码漏洞检测已经在另一个GitHub进行开源
-- 具体请跳转到[这里](https://github.com/HuantWang/FUNDED_NISL)
+### Case Study 1: Heterogeneous Mapping
+In this task, we aim to build a predictive model to determine if the CPU or the GPU gives faster performance for a given OpenCL kernel. 
+
+``` 
+$ cd poem/src/tf2_gnn/case1_cli/
+$ source 00_set_case1.sh              /* Configuration  */
+$ source 01_run_get_model.sh          /* training the model */
+$ source 02_rerun_to_get_result.sh    /* testing by using the trained model */
+```
+
+### Case Study 2: Thread Coarsening
+In this task, we aim to build a model to determine how many parallel threads should be merged together to achieve faster execution time.
+
+``` 
+$ cd poem/src/tf2_gnn/case2_cli/
+$ python caseB-embedding-transfer.py
+``` 
+
+### Case Study 3 Loop Vectorization
+In this task, we aim to build a predictive model to determine the optimal vectorization factor (VF) and the interleaving factor (IF) for individual loops.
+
+``` 
+$ cd poem/src/tf2_gnn/case3_cli/
+$ source 00_set_caseFile.sh       /* Configuration  */
+$ source 01_run_get_model.sh      /* training the model */
+$ source 02_rerun_to_get_result.sh    /* testing by using the trained model */
+``` 
+
+### Case Study 4 Vulnerability Detection
+In this task, we build a model to detect if a given source code snippet contains one of the 2019 CWE top-25 most dangerous software errors at the function level.
+The more details of this task refer to our [another paper](https://github.com/HuantWang/FUNDED_NISL) appeared in IEEE TIFS.
+
 
 
 # Citation
