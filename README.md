@@ -61,7 +61,7 @@ $ cd poem/src/tf2_gnn/case2_cli/
 $ python caseB-embedding-transfer.py
 ``` 
 
-### Case Study 3 Loop Vectorization
+### Case Study 3: Loop Vectorization
 In this task, we aim to build a predictive model to determine the optimal vectorization factor (VF) and the interleaving factor (IF) for individual loops.
 
 ``` 
@@ -71,7 +71,7 @@ $ source 01_run_get_model.sh      /* training the model */
 $ source 02_rerun_to_get_result.sh    /* testing by using the trained model */
 ``` 
 
-### Case Study 4 Vulnerability Detection
+### Case Study 4: Vulnerability Detection
 In this task, we build a model to detect if a given source code snippet contains one of the 2019 CWE top-25 most dangerous software errors at the function level.
 The more details of this task refer to our [another paper](https://github.com/HuantWang/FUNDED_NISL) appeared in IEEE TIFS.
 
