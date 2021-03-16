@@ -1,4 +1,4 @@
-name: tf2-gnn-env
+name: multi-gnn-env
 channels:
   - defaults
 dependencies:

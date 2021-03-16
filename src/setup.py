@@ -9,15 +9,15 @@ with open(path.join(this_directory, "README.md"), encoding="utf-8") as f:
     long_description = f.read()
 
 setuptools.setup(
-    name="tf2_gnn",
+    name="multi-gnn",
     version="2.9.0",
     license="MIT",
     author="Marc Brockschmidt",
-    author_email="mabrocks@microsoft.com",
+    author_email="jqzhao@vip.qq.com",
     description="TensorFlow 2.0 implementation of Graph Neural Networks.",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/microsoft/tf2-gnn/",
+    url="",
     python_requires=">=3.6",
     install_requires=[
         "numpy",
