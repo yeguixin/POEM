@@ -1,7 +1,0 @@
-Setting random seed 0.
-Dataset parameters: {"max_nodes_per_batch": 32, "num_fwd_edge_types": 6, "add_self_loop_edges": true, "tie_fwd_bkwd_edges": true, "threshold_for_classification": 0.5}
-Model parameters: {"gnn_aggregation_function": "sum", "gnn_message_activation_function": "relu", "gnn_hidden_dim": 64, "gnn_use_target_state_as_input": false, "gnn_normalize_by_num_incoming": true, "gnn_num_edge_MLP_hidden_layers": 1, "gnn_num_aggr_MLP_hidden_layers": null, "gnn_message_calculation_class": "RGIN", "gnn_initial_node_representation_activation": "relu", "gnn_dense_intermediate_layer_activation": "relu", "gnn_num_layers": 2, "gnn_dense_every_num_layers": 10000, "gnn_residual_every_num_layers": 2, "gnn_use_inter_layer_layernorm": true, "gnn_layer_input_dropout_rate": 0.1, "gnn_global_exchange_mode": "gru", "gnn_global_exchange_every_num_layers": 10000, "gnn_global_exchange_weighting_fun": "softmax", "gnn_global_exchange_num_heads": 4, "gnn_global_exchange_dropout_rate": 0.2, "optimizer": "Adam", "learning_rate": 0.005, "learning_rate_decay": 0.98, "momentum": 0.85, "gradient_clip_value": 1.0, "use_intermediate_gnn_results": false, "graph_aggregation_num_heads": 8, "graph_aggregation_hidden_layers": [64], "graph_aggregation_dropout_rate": 0.005}
-== Running on test dataset
-Loading data from /dev/shm/zjq/case1_data/amd/new_9/ast.
-Restoring best model state from model/amd_10//result_amd_new_9/RGIN_GraphBinaryClassification__2020-06-29_00-09-55_best.pkl.
-Accuracy = 0.779
