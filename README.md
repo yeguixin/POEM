@@ -38,7 +38,7 @@ $ pip install -r req.txt  /* installing the requirements   */
 ```
 
 ## Dataset
-The dataset used in our experiments are avaliable on our cloud disk by clicking the [archive link](https://pan.baidu.com/s/1QHyoCf0E7am1e2DfJTrv1w) or [the link](https://pan.baidu.com/s/1QHyoCf0E7am1e2DfJTrv1w) for our domestic users. The detailed usage of our dataset refers to [here](./data/README.md).
+The dataset used in our experiments are avaliable on our cloud disk by clicking the [archive link](https://pan.baidu.com/s/1QHyoCf0E7am1e2DfJTrv1w) or [the link](https://pan.baidu.com/s/1QHyoCf0E7am1e2DfJTrv1w) with `PASSWD: ntt6`  for China users. The detailed usage of our dataset refers to [here](./data/README.md).
 
 
 ## Running
