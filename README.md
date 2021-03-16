@@ -28,13 +28,13 @@ POEM works on a machine running Linux with NVIDIA GPUs. The primary evaluations 
 Python 3.6 and Tensorflow 2.0.0 with CUDA are required to run POEM. Please refer to [this link](https://developer.nvidia.com/cuda-toolkit-archive) for installing CUDA Toolkits.
 To get ready for running POEM, please additionally run the following commands:
 
-```sh
+```
 $ conda create -n poem python=3.6
 $ conda activate poem
 $ git clone https://github.com/yeguixin/POEM.git
 $ cd poem/src
 $ pip install -e ./     /* installing multi-gnn  */
-pip install -r req.txt  /* installing the requirements   */
+$ pip install -r req.txt  /* installing the requirements   */
 ```
 
 ## Dataset
