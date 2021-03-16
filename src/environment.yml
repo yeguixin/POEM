@@ -1,0 +1,13 @@
+name: tf2-gnn-env
+channels:
+  - defaults
+dependencies:
+  - pip
+  - python==3.7
+  - numpy
+  - tensorflow>=2.0.0
+  - pip:
+    - docopt
+    - dpu-utils>=0.2.7
+    - h5py
+

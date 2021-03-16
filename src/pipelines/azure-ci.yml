@@ -1,0 +1,79 @@
+# Test TF2-GNN package and build sdist to be consumed by release pipeline
+trigger:
+  branches:
+    include:
+      - '*'
+  paths:
+    include:
+      - tf2_gnn/*
+      - setup.py
+      - pipelines/*.yml
+
+jobs:
+- job: 'Test'
+
+  pool:
+    vmImage: 'ubuntu-latest'
+
+  strategy:
+    matrix:
+      Python36:
+        python.version: '3.6'
+      Python37:
+        python.version: '3.7'
+      Python38:
+        python.version: '3.8'
+    maxParallel: 4
+
+  steps:
+  - task: UsePythonVersion@0
+    inputs:
+      versionSpec: '$(python.version)'
+    displayName: 'Set python version to $(python.version)'
+
+  - script: python -m pip install --upgrade pip && pip install numpy docopt dpu-utils tensorflow azureml-core
+    displayName: 'Install dependencies'
+
+  - script: |
+      pip install pytest
+      pytest ./tf2_gnn/ --doctest-modules --doctest-ignore-import-errors --junitxml=junit/test-results.xml
+    displayName: 'Run pytest'
+
+  - task: PublishTestResults@2
+    inputs:
+      testResultsFiles: 'junit/test-results.xml'
+      testRunTitle: 'GNN tests'
+    condition: succeededOrFailed()
+    displayName: 'Publish test results'
+
+- job: 'Build_and_Publish_Artifact'
+  dependsOn: 'Test'
+  pool:
+    vmImage: 'ubuntu-latest'
+
+  steps:
+  - task: UsePythonVersion@0
+    inputs:
+      versionSpec: '3.6'
+    displayName: 'Set python version to 3.6'
+
+  - task: ComponentGovernanceComponentDetection@0
+    inputs:
+      scanType: 'Register'
+      verbosity: 'Verbose'
+      alertWarningLevel: 'High'
+
+  - task: PublishSecurityAnalysisLogs@3
+    inputs:
+      ArtifactName: 'CodeAnalysisLogs'
+      ArtifactType: 'Container'
+
+  - script: |
+      python setup.py sdist
+    displayName: 'Build sdist'
+
+  - task: PublishBuildArtifacts@1
+    displayName: 'Publish artifact: dist'
+    inputs:
+      pathtoPublish: './dist'
+      artifactName: 'sdist-output'

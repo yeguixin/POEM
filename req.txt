@@ -1,0 +1,12 @@
+h5py==2.10.0
+jsonlines==1.2.0
+Keras==2.3.1
+labm8==0.0.15
+memory-profiler==0.57.0
+networkx==2.4
+nni==1.6
+numpy==1.16.0
+pandas==1.0.4
+progressbar==2.5
+tensorflow==2.0.0
+zipp==3.1.0

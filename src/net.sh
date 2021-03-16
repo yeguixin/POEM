@@ -1,0 +1,1 @@
+wget https://10.0.1.242/a70.htm --post-data="DDDDD=201921051&upass=201921051&R1=0&R2=&R6=0&para=00&v6ip=&f4serip=10.0.1.242&0MKKey=123456" --no-check-certificate --delete-after
