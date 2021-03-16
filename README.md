@@ -1,5 +1,5 @@
 # POEM
-POEM is a deep program structure modeling framework by leveraging a multi-relational graph neural network. It is built upon [tf2-gnn](https://github.com/microsoft/tf2-gnn), a graph neural network. POEM can capture the deep program semantic and structural features for code representation. We evaluated POEM by applying it to four representative tasks: heterogeneous device mapping, GPU thread coarsening, loop vectorization and code vul- nerability detection, and it gives the better performance than SOTA methods.
+POEM is a deep program structure modeling framework by leveraging a multi-relational graph neural network. It is built upon [tf2-gnn](https://github.com/microsoft/tf2-gnn), a graph neural network. POEM can capture the deep program semantic and structural features for code representation. We evaluated POEM by applying it to four representative tasks: [heterogeneous device mapping](#CS1), [GPU thread coarsening](#CS2), [loop vectorization](#CS3) and [code vulnerability detection](#CS4), and it gives the better performance than SOTA methods.
 For more details, please refer to our [paper](https://dl.acm.org/doi/abs/10.1145/3410463.3414670), "Deep Program Structure Modeling Through Multi-Relational Graph-based Learning", which appeared in PACT 2020.
 
 ## Abstract
@@ -43,7 +43,7 @@ The dataset used in our experiments are avaliable on our cloud disk by clicking 
 
 ## Running
 
-### Case Study 1: Heterogeneous Mapping
+### Case Study 1: Heterogeneous Mapping <br id = "CS1">
 In this task, we aim to build a predictive model to determine if the CPU or the GPU gives faster performance for a given OpenCL kernel. 
 
 ``` 
@@ -53,7 +53,7 @@ $ source 01_run_get_model.sh          /* training the model */
 $ source 02_rerun_to_get_result.sh    /* testing by using the trained model */
 ```
 
-### Case Study 2: Thread Coarsening
+### Case Study 2: Thread Coarsening <br id = "CS2">
 In this task, we aim to build a model to determine how many parallel threads should be merged together to achieve faster execution time.
 
 ``` 
@@ -61,7 +61,7 @@ $ cd poem/src/tf2_gnn/case2_cli/
 $ python caseB-embedding-transfer.py
 ``` 
 
-### Case Study 3: Loop Vectorization
+### Case Study 3: Loop Vectorization <br id = "CS3">
 In this task, we aim to build a predictive model to determine the optimal vectorization factor (VF) and the interleaving factor (IF) for individual loops.
 
 ``` 
@@ -71,10 +71,9 @@ $ source 01_run_get_model.sh      /* training the model */
 $ source 02_rerun_to_get_result.sh    /* testing by using the trained model */
 ``` 
 
-### Case Study 4: Vulnerability Detection
+### Case Study 4: Vulnerability Detection   <br id = "CS4">
 In this task, we build a model to detect if a given source code snippet contains one of the 2019 CWE top-25 most dangerous software errors at the function level.
 The more details of this task refer to our [another paper](https://github.com/HuantWang/FUNDED_NISL) appeared in IEEE TIFS.
-
 
 
 # Citation
