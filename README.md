@@ -1,6 +1,6 @@
 # POEM
 POEM is a deep program structure modeling framework by leveraging a multi-relational graph neural network. It is built upon [tf2-gnn](https://github.com/microsoft/tf2-gnn), a graph neural network. POEM can capture the deep program semantic and structural features for code representation. We evaluated POEM by applying it to four representative tasks: [heterogeneous device mapping](#CS1), [GPU thread coarsening](#CS2), [loop vectorization](#CS3) and [code vulnerability detection](#CS4), and it gives the better performance than SOTA methods.
-For more details, please refer to our [paper](https://dl.acm.org/doi/abs/10.1145/3410463.3414670), "Deep Program Structure Modeling Through Multi-Relational Graph-based Learning", which appeared in PACT 2020.
+For more details, please refer to our [paper](https://dl.acm.org/doi/abs/10.1145/3410463.3414670), "**Deep Program Structure Modeling Through Multi-Relational Graph-based Learning**", which appeared in PACT 2020.
 
 ## Abstract
 > Deep learning is emerging as a promising technique for building predictive models to support code-related tasks like performance
