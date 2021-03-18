@@ -11,7 +11,7 @@ There are three kinds of compressed files which are introduced as follows:
 - **nvidia:** This file contains about 680 OpenCL kernels that labeled under NVIDIA platform.
 - **1w:** This file contains the 10,000 OpenCL kernels that labeled under NVIDIA plarform.
 
-Note that there are also three csv files. They respectively are the parameters of the comparison experiments by using the above three data sets.
+Note that there are also three CSV (Comma Separated Values) files. They respectively are the parameters of the comparison experiments by using the above three data sets.
 
 
 ## Case2
