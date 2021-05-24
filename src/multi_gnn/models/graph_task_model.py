@@ -4,8 +4,8 @@ from typing import Tuple, List, Dict, Optional, Any, Iterable, Union
 
 import tensorflow as tf
 
-from tf2_gnn import GNNInput, GNN
-from tf2_gnn.data import GraphDataset
+from multi_gnn import GNNInput, GNN
+from multi_gnn.data import GraphDataset
 
 
 class GraphTaskModel(tf.keras.Model):

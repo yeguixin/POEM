@@ -1,4 +1,4 @@
-name: multi-gnn-env
+name: multi_gnn-env
 channels:
   - defaults
 dependencies:

@@ -4,8 +4,8 @@ from typing import Tuple, List, Dict, Optional, Any, Iterable, Union
 
 import tensorflow as tf
 
-from tf2_gnn import GNNInput, GNN
-from tf2_gnn.data import GraphDataset
+from multi_gnn import GNNInput, GNN
+from multi_gnn.data import GraphDataset
 
 
 class GraphTaskModel(tf.keras.Model):
@@ -72,7 +72,7 @@ class GraphTaskModel(tf.keras.Model):
                 Per default (or if the hyperparameter "use_intermediate_gnn_results" was
                 set to False), the final representations of the graph nodes as computed
                 by the GNN.
-                If the hyperparameter "use_intermediate_gntrain_metric_stringn_results" was set to True,
+                If the hyperparameter "use_intermediate_gnn_results" was set to True,
                 a pair of the final node representation and all intermediate node
                 representations, including the initial one.
             training: Flag indicating if we are training or not.
@@ -90,6 +90,7 @@ class GraphTaskModel(tf.keras.Model):
             final_node_representations: Union[tf.Tensor, Tuple[tf.Tensor, List[tf.Tensor]]],
             batch_features_2: Dict[str, tf.Tensor],
             final_node_representations_2: Union[tf.Tensor, Tuple[tf.Tensor, List[tf.Tensor]]],
+            batch_features_3: Dict[str, tf.Tensor],
             training: bool,
     ) -> Any:
         """Compute task-specific output (labels, scores, regression values, ...).
@@ -112,7 +113,7 @@ class GraphTaskModel(tf.keras.Model):
         """
         pass
 
-    def call(self, inputs,inputs2, training: bool):
+    def call(self, inputs,inputs2, inputs3,training: bool):
         # Pack input data from keys back into a tuple:
         adjacency_lists: Tuple[tf.Tensor, ...] = tuple(
             inputs[f"adjacency_list_{edge_type_idx}"]
@@ -153,7 +154,7 @@ class GraphTaskModel(tf.keras.Model):
             training=training,
             return_all_representations=self._use_intermediate_gnn_results
         )
-        return self.compute_task_output_new(inputs, gnn_output_1,inputs2,gnn_output_2, training)
+        return self.compute_task_output_new(inputs, gnn_output_1,inputs2,gnn_output_2, inputs3,training)
         # per_graph_results_2=self.compute_task_output_new(inputs2, gnn_output_2, training)
         # per_graph_results=tf.concat([per_graph_results_1,per_graph_results_2],axis=1)
         #each graph result
@@ -308,18 +309,23 @@ class GraphTaskModel(tf.keras.Model):
         return tf.concat(task_outputs, axis=0)
 
     def run_one_epoch_new(
-        self, dataset: tf.data.Dataset,dataset2: tf.data.Dataset, quiet: bool = False, training: bool = True,
+        self, dataset: tf.data.Dataset,dataset2: tf.data.Dataset, dataset3: tf.data.Dataset,quiet: bool = False, training: bool = True,
     ) -> Tuple[float, float, List[Any]]:
         epoch_time_start = time.time()
         total_num_graphs = 0
         task_results = []
         total_loss = tf.constant(0, dtype=tf.float32)
-        for ((step, (batch_features, batch_labels)),(step_2, (batch_features_2, batch_labels_2))) in zip(enumerate(dataset),enumerate(dataset2)):
-        # for step, (batch_features, batch_labels) in enumerate(dataset2):
+        # for step, (batch_features, batch_labels) in enumerate(dataset):
+        #     print(step)
+        #     print(batch_features,batch_features)
+        # for step3, (batch_features3, batch_labels3) in enumerate(dataset3):
+        #     print(step3)
+        #     print(batch_features3)
+        for ((step, (batch_features, batch_labels)),(step_2, (batch_features_2, batch_labels_2)),(step_3, (batch_features_3, batch_labels_3))) in zip(enumerate(dataset),enumerate(dataset2),enumerate(dataset3)):
             with tf.GradientTape() as tape:
                 #first vector
                 # batch_features_all=tf.concat(batch_features,batch_features_2)
-                task_output = self(batch_features,batch_features_2, training=training)
+                task_output = self(batch_features,batch_features_2, batch_features_3 ,training=training)
                 #second vector
                 # print("a")
                 # task_output = self(batch_features_2, training=training)

@@ -4,9 +4,9 @@ from typing import NamedTuple
 import tensorflow as tf
 from dpu_utils.tf2utils import MLP
 
-from tf2_gnn.layers import WeightedSumGraphRepresentation, NodesToGraphRepresentationInput
+from multi_gnn.layers import WeightedSumGraphRepresentation, NodesToGraphRepresentationInput
 
-from tf2_gnn.utils.gather_dense_gradient import gather_dense_gradient
+from multi_gnn.utils.gather_dense_gradient import gather_dense_gradient
 
 
 class GraphGlobalExchangeInput(NamedTuple):

@@ -5,7 +5,7 @@ trigger:
       - '*'
   paths:
     include:
-      - multi-gnn/*
+      - multi_gnn/*
       - setup.py
       - pipelines/*.yml
 
@@ -36,7 +36,7 @@ jobs:
 
   - script: |
       pip install pytest
-      pytest ./tf2_gnn/ --doctest-modules --doctest-ignore-import-errors --junitxml=junit/test-results.xml
+      pytest ./multi_gnn/ --doctest-modules --doctest-ignore-import-errors --junitxml=junit/test-results.xml
     displayName: 'Run pytest'
 
   - task: PublishTestResults@2

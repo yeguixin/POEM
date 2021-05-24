@@ -3,7 +3,7 @@ from typing import Any, Dict, NamedTuple, List, Tuple, Optional
 
 import tensorflow as tf
 
-from tf2_gnn.utils.param_helpers import get_activation_function
+from multi_gnn.utils.param_helpers import get_activation_function
 from .message_passing import (
     MessagePassing,
     MessagePassingInput,

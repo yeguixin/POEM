@@ -4,10 +4,9 @@ from typing import Any, Dict, List, Tuple, Optional
 import numpy as np
 import tensorflow as tf
 
-from tf2_gnn.data import GraphDataset
-from tf2_gnn.models import GraphTaskModel
-from tf2_gnn.layers import WeightedSumGraphRepresentation, NodesToGraphRepresentationInput
-
+from multi_gnn.data import GraphDataset
+from multi_gnn.models import GraphTaskModel
+from multi_gnn.layers import WeightedSumGraphRepresentation, NodesToGraphRepresentationInput
 
 
 class GraphBinaryClassificationTask(GraphTaskModel):
@@ -45,13 +44,17 @@ class GraphBinaryClassificationTask(GraphTaskModel):
                     num_graphs=tf.TensorShape(()),
                 )
             )
+#fh change
+            # self._graph_repr_to_classification_layer = tf.keras.layers.Dense(
+            #     units=1, activation=tf.nn.sigmoid, use_bias=True
+            # )
 
             self._graph_repr_to_classification_layer = tf.keras.layers.Dense(
-                units=1, activation=tf.nn.sigmoid, use_bias=True
+                units=5, activation=tf.nn.sigmoid, use_bias=True
             )
             #change the  self._params["graph_aggregation_num_heads"] to yours
             self._graph_repr_to_classification_layer.build(
-                tf.TensorShape((None, self._params["graph_aggregation_num_heads"]*2))
+                tf.TensorShape((None, self._params["graph_aggregation_num_heads"]*2+1))
             )
         super().build(input_shapes)
 
@@ -73,7 +76,7 @@ class GraphBinaryClassificationTask(GraphTaskModel):
         per_graph_results = self._graph_repr_to_classification_layer(
             per_graph_results
         )  # Shape [G, 1]
-
+        #print("ptwo:",per_graph_results)
         return tf.squeeze(per_graph_results, axis=-1)
 
     #New COMPUTE
@@ -83,6 +86,7 @@ class GraphBinaryClassificationTask(GraphTaskModel):
         final_node_representations: tf.Tensor,
         batch_features_2: Dict[str, tf.Tensor],
         final_node_representations_2:tf.Tensor,
+        batch_features_3: Dict[str, tf.Tensor],
         training: bool,
     ) -> Any:
         per_graph_results_1 = self._node_to_graph_repr_layer(
@@ -104,14 +108,46 @@ class GraphBinaryClassificationTask(GraphTaskModel):
                 num_graphs=batch_features_2["num_graphs_in_batch"],
             )
         )  # Shape [G, graph_aggregation_num_heads]
+        # print(per_graph_results_2.shape[0])
         #concat
+
         per_graph_results_all=tf.concat([per_graph_results_1, per_graph_results_2], axis=1)
+       # print("ptwo:",per_graph_results_all)
+        # print(batch_features_3["node_features"].shape[0])
+        with open("embeding.log", "w") as fd:
+            fd.write(str(per_graph_results_all))
+        per_graph_results_3 = tf.reshape(batch_features_3["node_features"][0][0], (1, 1))
+        i=tf.cast(batch_features_3["node_features"][0][1],tf.int32)
+        # print(i)
+        # print(i<batch_features_3["node_features"].shape[0])
+        # print(tf.reshape(batch_features_3["node_features"][i][0],(1,1)))
+        while(i<batch_features_3["node_features"].shape[0]):
+
+            per_graph_results_3 = tf.concat([per_graph_results_3, tf.reshape(batch_features_3["node_features"][i][0],(1,1))], axis=0)
+            i= i + tf.cast(batch_features_3["node_features"][i][1],tf.int32)
+
+        # read_new_inputs
+        # per_graph_results_3 = tf.reshape(batch_features_3["node_features"][0][0],(1,1))
+        #
+        #
+        # for i in range(1,per_graph_results_2.shape[0]) :
+        #     per_graph_results_3 = tf.concat([per_graph_results_3, tf.reshape(batch_features_3["node_features"][i][0],(1,1))], axis=0)
+
+        # print(per_graph_results_3)
+        per_graph_results_all = tf.concat([per_graph_results_all, per_graph_results_3], axis=1)
+        # print(per_graph_results_all)
+
+
+
 
         per_graph_results = self._graph_repr_to_classification_layer(
             per_graph_results_all
         )  # Shape [G, 1]
 
-        return tf.squeeze(per_graph_results, axis=-1)
+        #fh change
+        return per_graph_results
+
+        # return tf.squeeze(per_graph_results, axis=-1)
 
     def compute_task_metrics(
         self,
@@ -119,72 +155,40 @@ class GraphBinaryClassificationTask(GraphTaskModel):
         task_output: Any,
         batch_labels: Dict[str, tf.Tensor],
     ) -> Dict[str, tf.Tensor]:
+        #fh change
+        # ce = tf.reduce_mean(
+        #     tf.keras.losses.binary_crossentropy(
+        #         y_true=batch_labels["target_value"], y_pred=task_output, from_logits=False
+        #     )
+        # )
         ce = tf.reduce_mean(
-            tf.keras.losses.binary_crossentropy(
+            tf.keras.losses.categorical_crossentropy(
                 y_true=batch_labels["target_value"], y_pred=task_output, from_logits=False
             )
         )
-        TP=0
-        FP=0
-        TN=0
-        FN=0
-        for (i,j) in zip(batch_labels["target_value"],tf.math.round(task_output)):
-            if i==1:
-                if i==j:
-                    TP +=1
-                    continue
-                if i!=j:
-                    FP +=1
-                    continue
-            if i==0:
-                if i==j:
-                    TN+=1
-                    continue
-                if i!=j:
-                    FN+=1
-                    continue
-
-            # accuracy
+        print("pred")
+        for _ in task_output:
+            print(_)
+       
+        # a=tf.math.round(task_output)
+        # num_correct = tf.reduce_sum(
+        #     tf.cast(
+        #         tf.math.equal(batch_labels["target_value"], tf.math.round(task_output)), tf.int32
+        #     )
+        # )
+        #fh change
         num_correct = tf.reduce_sum(
             tf.cast(
-                tf.math.equal(batch_labels["target_value"], tf.math.round(task_output)), tf.int32
+                tf.math.equal(tf.math.argmax(batch_labels["target_value"], axis=1),
+                              tf.math.argmax(task_output, axis=1)), tf.int32
             )
         )
         num_graphs = tf.cast(batch_features["num_graphs_in_batch"], tf.float32)
-
-        try:
-            ACC = (TP + TN) /num_graphs
-            Precision = TP / (TP + FP)
-            Recall = TP / (TP + FN)
-            F1= 2*TP/ (2*TP + FN + FP )
-            TPR=TP / (TP + FN)
-            FPR= FP / (FP + TN)
-            TNR=TN/(FP+TN)
-            FNR =FN/(FN+TP)
-        except:
-            ACC = 0
-            Precision = 0
-            Recall = 0
-            F1= 0
-            TPR= 0
-            FPR= 0
-            TNR= 0
-            FNR = 0
-            print("Lucky next,go ahead")
-
         return {
             "loss": ce,
             "batch_acc": tf.cast(num_correct, tf.float32) / num_graphs,
-            "batch_precision": Precision,
-            "batch_recall": Recall,
-            "batch_f1": F1,
-            "batch_TPR": TPR,
-            "batch_FPR": FPR,
-            "batch_TNR": TNR,
-            "batch_FNR": FNR,
             "num_correct": num_correct,
             "num_graphs": num_graphs,
-
         }
 
     def compute_epoch_metrics(self, task_results: List[Any]) -> Tuple[float, str]:
@@ -195,15 +199,4 @@ class GraphBinaryClassificationTask(GraphTaskModel):
             batch_task_result["num_correct"] for batch_task_result in task_results
         )
         epoch_acc = tf.cast(total_num_correct, tf.float32) / total_num_graphs
-        epoch_precision=task_results[0]["batch_precision"]
-        epoch_recall=task_results[0]["batch_recall"]
-        epoch_f1=task_results[0]["batch_f1"]
-        epoch_TPR=task_results[0]["batch_TPR"]
-        epoch_FPR=task_results[0]["batch_FPR"]
-        epoch_TNR=task_results[0]["batch_TNR"]
-        epoch_FNR=task_results[0]["batch_FNR"]
-
-        return -epoch_acc.numpy(), f"Accuracy = {epoch_acc.numpy():.3f}",\
-               epoch_precision, f"precision = {epoch_precision:.3f}",epoch_recall, f"recall = {epoch_recall:.3f}"\
-            ,epoch_f1, f"f1 = {epoch_f1:.3f}",epoch_TPR, f"TPR = {epoch_TPR:.3f}",epoch_FPR, f"FPR = {epoch_FPR:.3f}",\
-               epoch_TNR, f"TNR = {epoch_TNR:.3f}",epoch_FNR, f"FNR = {epoch_FNR:.3f}"
+        return -epoch_acc.numpy(), f"Accuracy = {epoch_acc.numpy():.3f}"

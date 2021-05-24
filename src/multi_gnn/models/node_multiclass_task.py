@@ -3,8 +3,8 @@ from typing import Any, Dict, Iterable, List, NamedTuple, Iterator, Optional, Tu
 import numpy as np
 import tensorflow as tf
 
-from tf2_gnn.data import GraphDataset
-from tf2_gnn.models import GraphTaskModel
+from multi_gnn.data import GraphDataset
+from multi_gnn.models import GraphTaskModel
 
 
 def micro_f1(logits, labels):

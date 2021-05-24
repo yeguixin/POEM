@@ -4,7 +4,7 @@ from typing import Dict, List, NamedTuple, Tuple, Any
 
 import tensorflow as tf
 
-from tf2_gnn.utils.param_helpers import get_activation_function, get_aggregation_function
+from multi_gnn.utils.param_helpers import get_activation_function, get_aggregation_function
 
 
 class MessagePassingInput(NamedTuple):

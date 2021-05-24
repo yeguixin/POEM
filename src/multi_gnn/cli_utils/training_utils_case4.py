@@ -17,7 +17,7 @@ from ..layers import get_known_message_passing_classes
 from ..models import GraphTaskModel
 from .model_utils import save_model, load_weights_verbosely, get_model_and_dataset
 from .task_utils import get_known_tasks
-import tf2_gnn.data.data.data_preprocess as DataSplit
+import multi_gnn.data.data.data_preprocess as DataSplit
 
 def make_run_id(model_name: str, task_name: str, run_name: Optional[str] = None) -> str:
     """Choose a run ID, based on the --run-name parameter and the current time."""

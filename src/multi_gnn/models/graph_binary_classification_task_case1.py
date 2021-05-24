@@ -4,9 +4,9 @@ from typing import Any, Dict, List, Tuple, Optional
 import numpy as np
 import tensorflow as tf
 
-from tf2_gnn.data import GraphDataset
-from tf2_gnn.models import GraphTaskModel
-from tf2_gnn.layers import WeightedSumGraphRepresentation, NodesToGraphRepresentationInput
+from multi_gnn.data import GraphDataset
+from multi_gnn.models import GraphTaskModel
+from multi_gnn.layers import WeightedSumGraphRepresentation, NodesToGraphRepresentationInput
 np.set_printoptions(threshold=np.inf)
 
 # 主要的工作

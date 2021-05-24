@@ -5,7 +5,7 @@ import tensorflow as tf
 from dpu_utils.tf2utils import MLP
 
 from .message_passing import MessagePassing, MessagePassingInput, register_message_passing_implementation
-from tf2_gnn.utils.constants import SMALL_NUMBER
+from multi_gnn.utils.constants import SMALL_NUMBER
 
 
 @register_message_passing_implementation

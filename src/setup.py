@@ -9,7 +9,7 @@ with open(path.join(this_directory, "README.md"), encoding="utf-8") as f:
     long_description = f.read()
 
 setuptools.setup(
-    name="multi-gnn",
+    name="multi_gnn",
     version="2.9.0",
     license="MIT",
     author="Marc Brockschmidt",
@@ -30,8 +30,8 @@ setuptools.setup(
     package_data={"": ["default_hypers/*.json"]},
     entry_points={
         "console_scripts": [
-            "tf2_gnn_train = tf2_gnn.cli.train:run",
-            "tf2_gnn_test = tf2_gnn.cli.test:run",
+            "multi_gnn_train = multi_gnn.cli.train:run",
+            "multi_gnn_test = multi_gnn.cli.test:run",
         ]
     },
     classifiers=[

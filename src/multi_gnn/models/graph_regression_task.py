@@ -5,9 +5,9 @@ import numpy as np
 import tensorflow as tf
 from dpu_utils.tf2utils import MLP
 
-from tf2_gnn.data import GraphDataset
-from tf2_gnn.models import GraphTaskModel
-from tf2_gnn.layers import WeightedSumGraphRepresentation, NodesToGraphRepresentationInput
+from multi_gnn.data import GraphDataset
+from multi_gnn.models import GraphTaskModel
+from multi_gnn.layers import WeightedSumGraphRepresentation, NodesToGraphRepresentationInput
 
 
 class GraphRegressionTask(GraphTaskModel):

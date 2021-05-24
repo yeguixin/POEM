@@ -33,7 +33,7 @@ $ conda create -n poem python=3.6
 $ conda activate poem
 $ git clone https://github.com/yeguixin/POEM.git
 $ cd poem/src
-$ pip install -e ./     /* installing multi-gnn  */
+$ pip install -e ./     /* installing multi_gnn  */
 $ pip install -r req.txt  /* installing the requirements   */
 ```
 
@@ -47,7 +47,7 @@ The dataset used in our experiments are avaliable on our cloud disk by clicking 
 In this task, we aim to build a predictive model to determine if the CPU or the GPU gives faster performance for a given OpenCL kernel. 
 
 ``` 
-$ cd poem/src/tf2_gnn/case1_cli/
+$ cd poem/src/multi_gnn/case1_cli/
 $ source 00_set_case1.sh              /* Configuration  */
 $ source 01_run_get_model.sh          /* training the model */
 $ source 02_rerun_to_get_result.sh    /* testing by using the trained model */
@@ -57,7 +57,7 @@ $ source 02_rerun_to_get_result.sh    /* testing by using the trained model */
 In this task, we aim to build a model to determine how many parallel threads should be merged together to achieve faster execution time.
 
 ``` 
-$ cd poem/src/tf2_gnn/case2_cli/
+$ cd poem/src/multi_gnn/case2_cli/
 $ python caseB-embedding-transfer.py
 ``` 
 
@@ -65,7 +65,7 @@ $ python caseB-embedding-transfer.py
 In this task, we aim to build a predictive model to determine the optimal vectorization factor (VF) and the interleaving factor (IF) for individual loops.
 
 ``` 
-$ cd poem/src/tf2_gnn/case3_cli/
+$ cd poem/src/multi_gnn/case3_cli/
 $ source 00_set_caseFile.sh       /* Configuration  */
 $ source 01_run_get_model.sh      /* training the model */
 $ source 02_rerun_to_get_result.sh    /* testing by using the trained model */

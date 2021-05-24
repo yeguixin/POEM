@@ -107,6 +107,6 @@ venv.bak/
 .idea
 
 # AzureML logs
-tf2_gnn/azure_ml/logs
-tf2_gnn/azure_ml/service_principal_auth.json
-tf2_gnn/azure_ml/aml_environment_tmp.yml
+multi_gnn/azure_ml/logs
+multi_gnn/azure_ml/service_principal_auth.json
+multi_gnn/azure_ml/aml_environment_tmp.yml
